@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Algorithms
+namespace Fuhrparkanwendung
 {
     class Menue
     {
@@ -12,7 +12,7 @@ namespace Algorithms
         int currentItem;
         string[] menueText = {};
         int menueLength;
-        Boolean exit, playGame = false;
+        Boolean exit = false;
 
         public Menue(string[] menueText)
         {
@@ -34,7 +34,7 @@ namespace Algorithms
                     {
                         break;
                     }
-                    else if (playGame)
+                    else if (exit)
                     {
                     }
                     else
@@ -90,7 +90,7 @@ namespace Algorithms
             }
             if (cki.Key == ConsoleKey.Enter && currentItem == 0)
             {
-                playGame = true;
+                // PASS
             }
         }
 
@@ -109,6 +109,12 @@ namespace Algorithms
         private Boolean CompairTwoItems(int firstItem, int secondItem)
         {
             return firstItem > secondItem;
+        }
+
+        public Boolean test()
+        {
+            Console.WriteLine("Hallo Welt");
+            return true;
         }
     }
 }

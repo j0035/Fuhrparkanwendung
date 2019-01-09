@@ -9,15 +9,15 @@ namespace Fuhrparkanwendung
     class MenueItem
     {
         string Name;
-        Func<Boolean> executableFunction;
+        Action executableFunction;
 
-        public MenueItem(string Name, Func<Boolean> execute)
+        public MenueItem(string Name, Action execute)
         {
             this.Name = Name;
             executeMenueFunction(execute);
         }
 
-        public void executeMenueFunction(Func<Boolean> execute)
+        public void executeMenueFunction(Action execute)
         {
             executableFunction = execute;
         }
