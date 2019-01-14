@@ -12,16 +12,21 @@ namespace Fuhrparkanwendung.Functional
         public string Modell { get; set; }
         public string Kennzeichen { get; set; }
         public DateTime Erstzulassung { get; set; }
-        public float Anschaffungspreis {get; set; }
+        public double Anschaffungspreis {get; set; }
+        public string Stellplatz { get; set; }
 
-        public Fahrzeug(string Hersteller, string Modell, string Kennzeichen, DateTime Erstzulassung, float Anschaffungspreis)
+        public Fahrzeug(string Hersteller, string Modell, string Kennzeichen, DateTime Erstzulassung, double Anschaffungspreis, string Stellplatz)
         {
             this.Hersteller = Hersteller;
             this.Modell = Modell;
             this.Kennzeichen = Kennzeichen;
             this.Erstzulassung = Erstzulassung;
             this.Anschaffungspreis = Anschaffungspreis;
+            this.Stellplatz = Stellplatz;
 
         }
+
+        abstract public double Steuerschuld();
+
     }
 }
