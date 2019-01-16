@@ -42,6 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Functional\Fahrzeug.cs" />
+    <Compile Include="Functional\Lkw.cs" />
+    <Compile Include="Functional\Motorrad.cs" />
+    <Compile Include="Functional\Parkhaus.cs" />
+    <Compile Include="Functional\Parkplatz.cs" />
+    <Compile Include="Functional\Pkw.cs" />
     <Compile Include="Menue.cs" />
     <Compile Include="MenueItem.cs" />
     <Compile Include="Program.cs" />
