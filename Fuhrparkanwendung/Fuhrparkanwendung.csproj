@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Data\FileHandler.cs" />
     <Compile Include="Data\WriteReadPkw.cs" />
+    <Compile Include="Data\WriteCSVFile.cs" />
     <Compile Include="Functional\Fahrzeug.cs" />
     <Compile Include="Functional\Lkw.cs" />
     <Compile Include="Functional\Motorrad.cs" />

@@ -17,11 +17,23 @@ namespace Fuhrparkanwendung
             //foo.execute();
             //Console.ReadKey();
 
-            FileHandler file = new FileHandler();
+            //FileHandler file = new FileHandler();
 
-            string[] t_set = { "Hallo", "Welt", "ich", "bin", "der", "Helmut" };
+            //string[] t_set = { "Hallo", "Welt", "ich", "bin", "der", "Helmut" };
 
-            file.Save("./Data/Test/test.csv", t_set, true, true);
+            WriteCSVFile Text = new WriteCSVFile();
+
+            Text.GenerateData();
+
+            string path = @"C:\Users\Helmut Karsten\Desktop\scholl\Jahr  zwei\ANW-OOP\Fuhrparkanwendung\Files\test.csv";
+
+            WriteReadPkw auto = new WriteReadPkw(path);
+            auto.Load();
+            auto.Show();
+
+
+
+
         }
     }
 

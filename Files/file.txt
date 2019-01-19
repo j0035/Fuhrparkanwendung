@@ -1,0 +1,4 @@
+A class is the most powerful data type in C#. Like a structure, /na class defines the data and behavior of the data type. First line
+Second line
+Third line
+A class is the most powerful data type in C#. Like a structure, /na class defines the data and behavior of the data type. 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fuhrparkanwendung.Functional
 {
-    abstract class Pkw : Fahrzeug
+    class Pkw : Fahrzeug
     {
         public int Hubraum { get; set; }
         public int Leistung { get; set; }
