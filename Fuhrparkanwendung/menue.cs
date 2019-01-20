@@ -10,15 +10,17 @@ namespace Fuhrparkanwendung
     {
         ConsoleKeyInfo cki;
         int currentItem;
+        List<MenueItem> MenueItems;
         string[] menueText = {};
         int menueLength;
         Boolean exit = false;
 
-        public Menue(string[] menueText)
+        public Menue(string[] menueText, List<MenueItem> MenueItems)
         {
             this.menueText = menueText;
             this.menueLength = this.menueText.Length;
             currentItem = 0;
+            this.MenueItems = MenueItems;
         }
 
         public void runMenue()
@@ -53,10 +55,15 @@ namespace Fuhrparkanwendung
 
         private void WriteMenueText()
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < MenueItems.Count; i++)
             {
                 WriteSingleMenueItems(i);
             }
+
+            //foreach (MenueItem Item in MenueItems)
+            //{
+            //    WriteSingleMenueItems(Item.Name);
+            //}
         }
 
         private void WriteSingleMenueItems(int iterator)
@@ -66,7 +73,7 @@ namespace Fuhrparkanwendung
                 Console.BackgroundColor = ConsoleColor.DarkRed;
             }
 
-            Console.WriteLine(menueText[iterator]);
+            Console.WriteLine(MenueItems[iterator].Name);
 
             Console.BackgroundColor = ConsoleColor.Black;
         }
@@ -84,13 +91,13 @@ namespace Fuhrparkanwendung
                 currentItem--;
                 checkForRimCase(0);
             }
-            if (cki.Key == ConsoleKey.Enter && currentItem == 3)
+            //if (cki.Key == ConsoleKey.Enter && currentItem == MenueItems.Count - 1)
+            //{
+            //    exit = true;
+            //}
+            if (cki.Key == ConsoleKey.Enter)
             {
-                exit = true;
-            }
-            if (cki.Key == ConsoleKey.Enter && currentItem == 0)
-            {
-                // PASS
+                MenueItems[currentItem].execute();
             }
         }
 
@@ -98,9 +105,9 @@ namespace Fuhrparkanwendung
         {
             if (TopBottom == 0 && CompairTwoItems(0, currentItem))
             {
-                currentItem = this.menueLength - 1;
+                currentItem = this.MenueItems.Count - 1;
             }
-            if (TopBottom == 1 && CompairTwoItems(currentItem, this.menueLength - 1))
+            if (TopBottom == 1 && CompairTwoItems(currentItem, this.MenueItems.Count - 1))
             {
                 currentItem = 0;
             }

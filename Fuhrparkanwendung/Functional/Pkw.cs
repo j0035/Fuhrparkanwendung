@@ -25,5 +25,10 @@ namespace Fuhrparkanwendung.Functional
         {
             return (this.Hubraum + 99) / 100 * 10 * (Schadstoffklasse + 1);
         }
+
+        public override string GetDatenString()
+        {
+            return String.Format(this.Kennzeichen + ',' + this.Hersteller + ',' + this.Modell + ',' + this.Erstzulassung + ',' + this.Anschaffungspreis + ',' + this.Stellplatz + ',' + this.Hubraum + ',' + this.Leistung + ',' + this.Schadstoffklasse);
+        }
     }
 }

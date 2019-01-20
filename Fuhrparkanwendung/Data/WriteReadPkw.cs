@@ -32,8 +32,8 @@ namespace Fuhrparkanwendung.Data
                         ArrPkw[1], 
                         ArrPkw[2], 
                         ArrPkw[0], 
-                        Convert.ToDateTime(ArrPkw[3]), 
-                        Convert.ToDouble(ArrPkw[4]), 
+                        DateTime.Parse(ArrPkw[3]), 
+                        Convert.ToDouble(ArrPkw[4]),
                         ArrPkw[5], 
                         Convert.ToInt32(ArrPkw[6]), 
                         Convert.ToInt32(ArrPkw[7]), 
@@ -47,14 +47,13 @@ namespace Fuhrparkanwendung.Data
 
         private void PersistPkwArray(string Path)
         {
-            String onePkw;
+            
             using (System.IO.StreamWriter file =
                     new System.IO.StreamWriter(Path, true))
             {
                 foreach (Pkw Wagen in AllePkw)
                 {
-                    onePkw = Wagen.Kennzeichen + ',' + Wagen.Hersteller + ',' + Wagen.Modell + ',' + Convert.ToString(Wagen.Erstzulassung) + ',' + Convert.ToString(Wagen.Anschaffungspreis) + ',' + Wagen.Stellplatz + ',' + Convert.ToString(Wagen.Hubraum) + ',' + Convert.ToString(Wagen.Leistung) + ',' + Convert.ToString(Wagen.Schadstoffklasse);
-                    file.WriteLine(onePkw);
+                    file.WriteLine(Wagen.GetDatenString());
                 }
             }
         }
@@ -71,9 +70,9 @@ namespace Fuhrparkanwendung.Data
 
         public void Show()
         {
-            foreach (Pkw wagen in AllePkw)
-            { 
-                Console.WriteLine(wagen.Kennzeichen + "\t" + wagen.Hersteller + "\t\t" + wagen.Modell + "\t" + wagen.Stellplatz);
+            foreach (Pkw Wagen in AllePkw)
+            {
+                Console.WriteLine(Wagen.GetDatenString());
             }
             Console.ReadKey();
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fuhrparkanwendung.Functional
 {
-    abstract class Lkw : Fahrzeug
+    class Lkw : Fahrzeug
     {
         public int AnzahlAchsen { get; set; }
         public int Zuladung { get; set; }
@@ -21,6 +21,11 @@ namespace Fuhrparkanwendung.Functional
         public override double Steuerschuld()
         {
             return this.Zuladung * 100;
+        }
+
+        public override string GetDatenString()
+        {
+            return String.Format(this.Kennzeichen + ',' + this.Hersteller + ',' + this.Modell + ',' + this.Erstzulassung + ',' + this.Anschaffungspreis + ',' + this.Stellplatz + ',' + this.AnzahlAchsen + ',' + this.Zuladung);
         }
     }
 }

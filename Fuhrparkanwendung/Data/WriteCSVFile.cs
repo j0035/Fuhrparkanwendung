@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Fuhrparkanwendung.Functional;
 
 namespace Fuhrparkanwendung.Data
 {
@@ -60,47 +61,45 @@ namespace Fuhrparkanwendung.Data
 
             Random rnd = new Random();
 
-            
+            List<Pkw> pkw = new List<Pkw>();
 
             for (int i = 0; i<100;  i++)
             {
                 int Carindex = rnd.Next(16);
-                String line =
-                Kennzeichen + Convert.ToString(rnd.Next(1, 10000)) + "," +
-                Cars[Carindex].Item1 + "," +
-                Cars[Carindex].Item2 + "," +
-                Convert.ToString(rnd.Next(2015,2019))+"-"+ Convert.ToString(rnd.Next(1,13)) +"-"+ Convert.ToString(rnd.Next(1, 25)) + "," +
-                Convert.ToString(Anschaffungspreis + rnd.Next(1, 20000)) + "," +
-                "A" + Convert.ToString(Stellplatz) + "," +
-                Convert.ToString(Hubraum + rnd.Next(1, 1500)) + "," +
-                Convert.ToString(PS + rnd.Next(1, 100)) + "," +
-                Convert.ToString(rnd.Next(3));
+
+                Pkw w = new Pkw(
+                    Cars[Carindex].Item1,
+                    Cars[Carindex].Item2,
+                    Kennzeichen + Convert.ToString(rnd.Next(1, 10000)), 
+                    new DateTime(rnd.Next(2015, 2019), rnd.Next(1, 13), rnd.Next(1, 25)),
+                    Anschaffungspreis + rnd.Next(1, 20000),
+                    "A" + Convert.ToString(Stellplatz),
+                    Hubraum + rnd.Next(1, 1500),
+                    PS + rnd.Next(1, 100),
+                    rnd.Next(3)
+                    );
+                
+                
+                //String line =
+                //Kennzeichen + Convert.ToString(rnd.Next(1, 10000)) + "," +
+                //Cars[Carindex].Item1 + "," +
+                //Cars[Carindex].Item2 + "," +
+                //Convert.ToString(rnd.Next(2015,2019))+"-"+ Convert.ToString(rnd.Next(1,13)) +"-"+ Convert.ToString(rnd.Next(1, 25)) + "," +
+                //Convert.ToString(Anschaffungspreis + rnd.Next(1, 20000)) + "," +
+                //"A" + Convert.ToString(Stellplatz) + "," +
+                //Convert.ToString(Hubraum + rnd.Next(1, 1500)) + "," +
+                //Convert.ToString(PS + rnd.Next(1, 100)) + "," +
+                //Convert.ToString(rnd.Next(3));
 
                 Stellplatz++;
 
                 using (System.IO.StreamWriter file =
-                new System.IO.StreamWriter(@"C:\Users\Helmut Karsten\Desktop\scholl\Jahr  zwei\ANW-OOP\Fuhrparkanwendung\Files\test.csv", true))
+                new System.IO.StreamWriter(@"C:\Users\Helmut Karsten\Desktop\scholl\Jahr  zwei\ANW-OOP\Fuhrparkanwendung\Files\testNeu.csv", true))
                 {
-                    file.WriteLine(line);
+                    file.WriteLine(w.GetDatenString());
                 }
             }
 
         }
     }
-    //Output (to WriteLines.txt):
-    //   First line
-    //   Second line
-    //   Third line
-
-    //Output (to WriteText.txt):
-    //   A class is the most powerful data type in C#. Like a structure, a class defines the data and behavior of the data type.
-
-    //Output to WriteLines2.txt after Example #3:
-    //   First line
-    //   Third line
-
-    //Output to WriteLines2.txt after Example #4:
-    //   First line
-    //   Third line
-    //   Fourth line
 }

@@ -10,15 +10,15 @@ namespace Fuhrparkanwendung.Functional
     {
         string Parkhausname { get; set; }
         int AnzahlParkplaetze { get; set; }
-        Parkplatz[] Plaetze { get; set; }
+        List<Parkplatz> Plaetze { get; set; }
         string Ort { get; set; } 
         string Adresse { get; set; }
         string Plz { get; set; }
-        int _anzMPlatz;
-        int _anzAPlatz { get; set; }
-        int _anzLPlatz { get; set; }
+        private int _anzMPlatz;
+        private int _anzAPlatz { get; set; }
+        private int _anzLPlatz { get; set; }
 
-        public Parkhaus(string Parkhausname, int AnzahlParkplaetze, Parkplatz[] Plaetze, string Ort, string Adresse, string Plz)
+        public Parkhaus(string Parkhausname, int AnzahlParkplaetze, List<Parkplatz> Plaetze, string Ort, string Adresse, string Plz)
         {
             this.Parkhausname = Parkhausname;
             this.AnzahlParkplaetze = AnzahlParkplaetze;
@@ -28,7 +28,7 @@ namespace Fuhrparkanwendung.Functional
             this.Plz = Plz;
         }
 
-        public int anzMPlatz
+        public int AnzMPlatz
         {
             get { return _anzMPlatz; }
             set
@@ -42,6 +42,42 @@ namespace Fuhrparkanwendung.Functional
                 }
 
                 _anzMPlatz = temp;
+            }
+        }
+
+        public int AnzAPlatz
+        {
+            get { return _anzAPlatz; }
+            set
+            {
+                int temp = 0;
+                foreach (Parkplatz Platz in Plaetze)
+                {
+                    if (Platz.Typ == 0)
+                    {
+                        temp++;
+                    }
+                }
+
+                _anzAPlatz = temp;
+            }
+        }
+
+        public int AnzLPlatz
+        {
+            get { return _anzLPlatz; }
+            set
+            {
+                int temp = 0;
+                foreach (Parkplatz Platz in Plaetze)
+                {
+                    if (Platz.Typ == 1)
+                    {
+                        temp++;
+                    }
+                }
+
+                _anzLPlatz = temp;
             }
         }
     }

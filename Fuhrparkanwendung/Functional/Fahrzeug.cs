@@ -28,5 +28,7 @@ namespace Fuhrparkanwendung.Functional
 
         abstract public double Steuerschuld();
 
+        abstract public string GetDatenString();
+
     }
 }

@@ -8,8 +8,8 @@ namespace Fuhrparkanwendung
 {
     class MenueItem
     {
-        string Name;
-        Action executableFunction;
+        public string Name;
+        public Action executableFunction;
 
         public MenueItem(string Name, Action execute)
         {

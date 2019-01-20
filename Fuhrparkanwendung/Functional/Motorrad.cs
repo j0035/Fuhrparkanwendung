@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fuhrparkanwendung.Functional
 {
-    abstract class Motorrad : Fahrzeug
+    class Motorrad : Fahrzeug
     {
         public int Hubraum { get; set; }
 
@@ -20,6 +20,11 @@ namespace Fuhrparkanwendung.Functional
         public override double Steuerschuld()
         {
             return (this.Hubraum + 99) / 100 * 20;
+        }
+
+        public override string GetDatenString()
+        {
+            return String.Format(this.Kennzeichen + ',' + this.Hersteller + ',' + this.Modell + ',' + this.Erstzulassung + ',' + this.Anschaffungspreis + ',' + this.Stellplatz + ',' + this.Hubraum);
         }
     }
 }

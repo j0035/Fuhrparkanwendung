@@ -25,15 +25,28 @@ namespace Fuhrparkanwendung.Functional
             get { return _Kennzeichen; }
             set 
             {
-                if (Besetzt)
+                if (Besetzt && Kennzeichen != null)
                 {
                     throw new InvalidOperationException("Parkplatz ist besetzt");
                 }
                 else
                 {
                     _Kennzeichen = value;
+                    Besetzt = _Kennzeichen != null; 
                 }
             }
+        }
+
+        public void BucheStellplatz(string Kennzeichen)
+        {
+            this.Kennzeichen = Kennzeichen;
+        }
+
+        public string StellplatzEntbuchen ()
+        {
+            string ret = Kennzeichen;
+            this.Kennzeichen = null;
+            return ret;
         }
         
     }

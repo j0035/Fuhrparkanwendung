@@ -11,9 +11,9 @@ namespace Fuhrparkanwendung
     {
         static void Main(string[] args)
         {
-            //test neu = new test();
-            //Action test = () => neu.function();
-            //MenueItem foo = new MenueItem("Test", test);
+            test neu = new test();
+            Action test = () => neu.function();
+            MenueItem foo = new MenueItem("Test", test);
             //foo.execute();
             //Console.ReadKey();
 
@@ -21,15 +21,24 @@ namespace Fuhrparkanwendung
 
             //string[] t_set = { "Hallo", "Welt", "ich", "bin", "der", "Helmut" };
 
-            WriteCSVFile Text = new WriteCSVFile();
+            //WriteCSVFile Text = new WriteCSVFile();
 
-            Text.GenerateData();
+            //Text.GenerateData();
 
-            string path = @"C:\Users\Helmut Karsten\Desktop\scholl\Jahr  zwei\ANW-OOP\Fuhrparkanwendung\Files\test.csv";
+            //string path = @"C:\Users\Helmut Karsten\Desktop\scholl\Jahr  zwei\ANW-OOP\Fuhrparkanwendung\Files\testNeu.csv";
 
-            WriteReadPkw auto = new WriteReadPkw(path);
-            auto.Load();
-            auto.Show();
+            //WriteReadPkw auto = new WriteReadPkw(path);
+            //auto.Load();
+            //auto.Show();
+
+            String[] MText = { "Hallo", "Test", "Ja", "Nein", "Helmut", "Karsten", "Why", "Isolation", "kann", "eine", "Nation", "Toeten" };
+
+            List<MenueItem> Mlist = new List<MenueItem>();
+
+            Mlist.Add(foo);
+
+            Menue menue = new Menue(MText, Mlist);
+            menue.runMenue();
 
 
 
@@ -37,12 +46,12 @@ namespace Fuhrparkanwendung
         }
     }
 
-    //internal class test
-    //{
-    //    public void function()
-    //    {
-    //        Console.WriteLine("Hello World");
-    //    }
-    //}
-    
+    internal class test
+    {
+        public void function()
+        {
+            Console.WriteLine("Hello World");
+        }
+    }
+
 }
