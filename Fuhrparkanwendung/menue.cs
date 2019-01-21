@@ -11,14 +11,10 @@ namespace Fuhrparkanwendung
         ConsoleKeyInfo cki;
         int currentItem;
         List<MenueItem> MenueItems;
-        string[] menueText = {};
-        int menueLength;
-        Boolean exit = false;
+        Boolean exit, enter = false;
 
-        public Menue(string[] menueText, List<MenueItem> MenueItems)
+        public Menue(List<MenueItem> MenueItems)
         {
-            this.menueText = menueText;
-            this.menueLength = this.menueText.Length;
             currentItem = 0;
             this.MenueItems = MenueItems;
         }
@@ -36,8 +32,11 @@ namespace Fuhrparkanwendung
                     {
                         break;
                     }
-                    else if (exit)
+                    else if (enter)
                     {
+                        Console.Clear();
+                        MenueItems[currentItem].execute();
+                        enter = false;
                     }
                     else
                     {
@@ -91,13 +90,13 @@ namespace Fuhrparkanwendung
                 currentItem--;
                 checkForRimCase(0);
             }
-            //if (cki.Key == ConsoleKey.Enter && currentItem == MenueItems.Count - 1)
-            //{
-            //    exit = true;
-            //}
+            if (cki.Key == ConsoleKey.E)
+            {
+                exit = true;
+            }
             if (cki.Key == ConsoleKey.Enter)
             {
-                MenueItems[currentItem].execute();
+                enter = true;
             }
         }
 

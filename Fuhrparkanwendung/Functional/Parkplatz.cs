@@ -6,18 +6,20 @@ using System.Threading.Tasks;
 
 namespace Fuhrparkanwendung.Functional
 {
-    abstract class Parkplatz
+    class Parkplatz
     {
         public string Id { get; set; }
         public bool Besetzt { get; set; }
         public int Typ { get; set; }
         public string _Kennzeichen { get; set; }
         
-        public Parkplatz(string Id, int Typ, bool Besetzt = false)
+        
+        public Parkplatz(string Id, int Typ, bool Besetzt = false, string Kennzeichen = null)
         {
             this.Id = Id;
             this.Typ = Typ;
             this.Besetzt = Besetzt;
+            this.Kennzeichen = Kennzeichen;
         }
 
         public string Kennzeichen
@@ -48,6 +50,12 @@ namespace Fuhrparkanwendung.Functional
             this.Kennzeichen = null;
             return ret;
         }
-        
+
+        public string GetParkplatzString()
+        {
+            return String.Format(this.Id + ',' + this.Typ + ','  + this.Kennzeichen);
+
+        }
+           
     }
 }

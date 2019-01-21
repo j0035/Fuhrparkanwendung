@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Fuhrparkanwendung.Functional
 {
-    abstract class Parkhaus
+    class Parkhaus
     {
         string Parkhausname { get; set; }
         int AnzahlParkplaetze { get; set; }
-        List<Parkplatz> Plaetze { get; set; }
         string Ort { get; set; } 
         string Adresse { get; set; }
         string Plz { get; set; }
@@ -18,67 +17,18 @@ namespace Fuhrparkanwendung.Functional
         private int _anzAPlatz { get; set; }
         private int _anzLPlatz { get; set; }
 
-        public Parkhaus(string Parkhausname, int AnzahlParkplaetze, List<Parkplatz> Plaetze, string Ort, string Adresse, string Plz)
+        public Parkhaus(string Parkhausname, int AnzahlParkplaetze, string Ort, string Adresse, string Plz)
         {
             this.Parkhausname = Parkhausname;
             this.AnzahlParkplaetze = AnzahlParkplaetze;
-            this.Plaetze = Plaetze;
             this.Ort = Ort;
             this.Adresse = Adresse;
             this.Plz = Plz;
         }
 
-        public int AnzMPlatz
+        public String GetParkhausString()
         {
-            get { return _anzMPlatz; }
-            set
-            {
-                int temp = 0;
-                foreach (Parkplatz Platz in Plaetze) {
-                    if (Platz.Typ == 2)
-                    {
-                        temp++;
-                    }
-                }
-
-                _anzMPlatz = temp;
-            }
-        }
-
-        public int AnzAPlatz
-        {
-            get { return _anzAPlatz; }
-            set
-            {
-                int temp = 0;
-                foreach (Parkplatz Platz in Plaetze)
-                {
-                    if (Platz.Typ == 0)
-                    {
-                        temp++;
-                    }
-                }
-
-                _anzAPlatz = temp;
-            }
-        }
-
-        public int AnzLPlatz
-        {
-            get { return _anzLPlatz; }
-            set
-            {
-                int temp = 0;
-                foreach (Parkplatz Platz in Plaetze)
-                {
-                    if (Platz.Typ == 1)
-                    {
-                        temp++;
-                    }
-                }
-
-                _anzLPlatz = temp;
-            }
+           return String.Format(this.Parkhausname + ',' + this.AnzahlParkplaetze + ',' + this.Ort + ',' + this.Adresse + ',' + this.Plz );
         }
     }
 }

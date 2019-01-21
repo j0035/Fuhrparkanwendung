@@ -11,9 +11,13 @@ namespace Fuhrparkanwendung
     {
         static void Main(string[] args)
         {
+            string path = @"C:\Users\Helmut Karsten\Desktop\scholl\Jahr  zwei\ANW-OOP\Fuhrparkanwendung\Files\testNeu.csv";
             test neu = new test();
             Action test = () => neu.function();
+            WriteReadPkw cars = new WriteReadPkw(path);
+            Action bubu = () => cars.Show();
             MenueItem foo = new MenueItem("Test", test);
+            MenueItem bar = new MenueItem("Alle Autos", bubu);
             //foo.execute();
             //Console.ReadKey();
 
@@ -25,19 +29,18 @@ namespace Fuhrparkanwendung
 
             //Text.GenerateData();
 
-            //string path = @"C:\Users\Helmut Karsten\Desktop\scholl\Jahr  zwei\ANW-OOP\Fuhrparkanwendung\Files\testNeu.csv";
+            
 
             //WriteReadPkw auto = new WriteReadPkw(path);
             //auto.Load();
             //auto.Show();
 
-            String[] MText = { "Hallo", "Test", "Ja", "Nein", "Helmut", "Karsten", "Why", "Isolation", "kann", "eine", "Nation", "Toeten" };
-
             List<MenueItem> Mlist = new List<MenueItem>();
 
             Mlist.Add(foo);
+            Mlist.Add(bar);
 
-            Menue menue = new Menue(MText, Mlist);
+            Menue menue = new Menue(Mlist);
             menue.runMenue();
 
 

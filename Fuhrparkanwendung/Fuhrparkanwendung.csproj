@@ -45,6 +45,7 @@
     <Compile Include="Data\FileHandler.cs" />
     <Compile Include="Data\WriteReadLkw.cs" />
     <Compile Include="Data\WriteReadMotorrad.cs" />
+    <Compile Include="Data\WriteReadParkhausParkplatz.cs" />
     <Compile Include="Data\WriteReadPkw.cs" />
     <Compile Include="Data\WriteCSVFile.cs" />
     <Compile Include="Functional\Fahrzeug.cs" />
@@ -61,8 +62,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\Test\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
