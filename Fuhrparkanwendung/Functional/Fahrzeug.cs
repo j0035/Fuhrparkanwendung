@@ -30,5 +30,7 @@ namespace Fuhrparkanwendung.Functional
 
         abstract public string GetDatenString();
 
+        abstract public void StellPlatzBuchen(string path, string Haus);
+
     }
 }

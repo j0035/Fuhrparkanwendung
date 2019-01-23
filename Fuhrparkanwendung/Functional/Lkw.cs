@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Fuhrparkanwendung.Data;
 
 namespace Fuhrparkanwendung.Functional
 {
@@ -26,6 +27,12 @@ namespace Fuhrparkanwendung.Functional
         public override string GetDatenString()
         {
             return String.Format(this.Kennzeichen + ',' + this.Hersteller + ',' + this.Modell + ',' + this.Erstzulassung + ',' + this.Anschaffungspreis + ',' + this.Stellplatz + ',' + this.AnzahlAchsen + ',' + this.Zuladung);
+        }
+
+        public override void StellPlatzBuchen(string path, string Haus)
+        {
+            WriteReadParkhausParkplatz platz = new WriteReadParkhausParkplatz(path + "\\" + "parkhaus.csv", path + "\\" + "parkplatz.csv");
+            this.Stellplatz = platz.BucheParkplatz(this.Kennzeichen, 1, Haus);
         }
     }
 }

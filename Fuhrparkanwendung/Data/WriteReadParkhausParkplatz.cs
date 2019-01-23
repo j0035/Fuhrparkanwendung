@@ -10,17 +10,11 @@ namespace Fuhrparkanwendung.Data
 {
     class WriteReadParkhausParkplatz
     {
-        List<Pkw> Pkws;
-        List<Lkw> Lkws;
-        List<Motorrad> Bikes;
-        List<Parkplatz> ParkPlatzList;
-        List<Parkhaus> ParkHausList;
+        List<Parkplatz> ParkPlatzList = new List<Parkplatz>();
+        List<Parkhaus> ParkHausList = new List<Parkhaus>();
 
-        public WriteReadParkhausParkplatz(string filePathParkhaus, string filePathParkplatz, List<Pkw> Pkws, List<Lkw> Lkws, List<Motorrad> Bikes)
+        public WriteReadParkhausParkplatz(string filePathParkhaus, string filePathParkplatz)
         {
-            this.Pkws = Pkws;
-            this.Lkws = Lkws;
-            this.Bikes = Bikes;
             LoadParkhausList(filePathParkhaus);
             LoadParkplatzList(filePathParkplatz);
 
@@ -28,34 +22,72 @@ namespace Fuhrparkanwendung.Data
 
         private void LoadParkplatzList(string filePathParkplatz)
         {
-            using (StreamReader reader = new StreamReader(filePathParkplatz))
+            if (File.Exists(filePathParkplatz))
             {
-                String ln;
-
-                while ((ln = reader.ReadLine()) != null)
+                using (StreamReader reader = new StreamReader(filePathParkplatz))
                 {
-                    string[] ParkPlatz = ln.Split(',');
-                    Boolean Besetzt = ParkPlatz[2] == "" ? false : true;
-                    string Kennzeichen = Besetzt == false ? ParkPlatz[2] : null;
-                    Parkplatz Platz = new Parkplatz( ParkPlatz[0], Convert.ToInt16(ParkPlatz[1]), Besetzt, Kennzeichen );
-                    ParkPlatzList.Add(Platz);
+                    String ln;
 
+                    while ((ln = reader.ReadLine()) != null)
+                    {
+                        string[] ParkPlatz = ln.Split(',');
+                        Boolean Besetzt = ParkPlatz[2] == "" ? false : true;
+                        string Kennzeichen = Besetzt == false ? ParkPlatz[2] : null;
+                        Parkplatz Platz = new Parkplatz(ParkPlatz[0], Convert.ToInt16(ParkPlatz[1]), Besetzt, Kennzeichen);
+                        this.ParkPlatzList.Add(Platz);
+
+                    }
                 }
             }
+            
         }
 
         private void LoadParkhausList(string filePathParkhaus)
         {
-            using (StreamReader reader = new StreamReader(filePathParkhaus))
+            if (File.Exists(filePathParkhaus))
             {
-                String ln;
-
-                while ((ln = reader.ReadLine()) != null)
+                using (StreamReader reader = new StreamReader(filePathParkhaus))
                 {
-                    string[] Adresse = ln.Split(',');
-                    Parkhaus Haus = new Parkhaus(Adresse[0], 0, Adresse[1], Adresse[2], Adresse[3]);
-                    ParkHausList.Add(Haus);
+                    String ln;
 
+                    while ((ln = reader.ReadLine()) != null)
+                    {
+                        string[] Adresse = ln.Split(',');
+                        Parkhaus Haus = new Parkhaus(Adresse[0], Adresse[1], Adresse[2], Adresse[3]);
+                        this.ParkHausList.Add(Haus);
+
+                    }
+                }
+            }
+        }
+
+        public string BucheParkplatz(string Kennzeichen, int typ, string Parkhaus, string OnePlatz = "")
+        {
+            foreach(Parkplatz Platz in ParkPlatzList)
+            {
+
+                if (!Platz.Besetzt && Platz.Parkhaus() == Parkhaus && Platz.Typ == typ)
+                {
+                    Platz.Kennzeichen = Kennzeichen;
+                    return Platz.Id;
+                }
+                else
+                {
+                    continue;
+                }      
+            }
+            return "Achtung Parkplatz ist Voll";
+        }
+
+        private void PersistPkwArray(string Path)
+        {
+
+            using (System.IO.StreamWriter file =
+                    new System.IO.StreamWriter(Path, false))
+            {
+                foreach (Parkplatz Platz in ParkPlatzList)
+                {
+                    file.WriteLine(Platz.GetParkplatzString());
                 }
             }
         }

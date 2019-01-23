@@ -56,6 +56,12 @@ namespace Fuhrparkanwendung.Functional
             return String.Format(this.Id + ',' + this.Typ + ','  + this.Kennzeichen);
 
         }
+
+        public string Parkhaus()
+        {
+            String[] Parkhaus = Id.Split('/');
+            return Parkhaus[0];
+        }
            
     }
 }

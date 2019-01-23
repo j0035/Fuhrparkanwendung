@@ -34,9 +34,14 @@ namespace Fuhrparkanwendung
                     }
                     else if (enter)
                     {
+                        enter = false;
                         Console.Clear();
                         MenueItems[currentItem].execute();
+                        currentItem = 0;
+                        Console.Clear();
                         enter = false;
+                        WriteMenueText();
+                        
                     }
                     else
                     {

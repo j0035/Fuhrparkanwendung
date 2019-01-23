@@ -21,7 +21,9 @@ namespace Fuhrparkanwendung.Data
 
         private void LoadLkwArray(string Path)
         {
-            using (StreamReader reader = new StreamReader(Path))
+            if (File.Exists(Path))
+            {
+                using (StreamReader reader = new StreamReader(Path))
             {
                 String ln;
 
@@ -42,6 +44,7 @@ namespace Fuhrparkanwendung.Data
                     AlleLkw.Add(Lkw);
                 }
             }
+            }
         }
 
         private void PersistLkwArray(string Path)
@@ -56,6 +59,7 @@ namespace Fuhrparkanwendung.Data
                 }
             }
         }
+
 
         public void Load()
         {
@@ -74,6 +78,74 @@ namespace Fuhrparkanwendung.Data
                 Console.WriteLine(Laster.GetDatenString());
             }
             Console.ReadKey();
+        }
+
+        private List<String> AskForInput()
+        {
+            String[] Fragen = {
+                "Geben Sie den Hersteller ein",
+                "Geben Sie das Modell ein",
+                "Geben Sie das Kennzeichen ein",
+                "Geben Sie das Datum der Erstzulassung ein",
+                "Geben Sie den Anschaffungspreis ein",
+                "Geben Sie den Stellplatz ein (Lassen Sie dieses Feld Leer um einen leeren Platz zugewiesen zu bekommen)",
+                "Geben Sie die Anzahl der Achsen ein",
+                "Geben Sie die Zuladung ein",
+            };
+
+            List<String> Parameter = new List<String>();
+
+            foreach (String Frage in Fragen)
+            {
+                Console.WriteLine(Frage);
+                Parameter.Add(Console.ReadLine());
+                Console.Clear();
+
+            }
+
+            return Parameter;
+        }
+
+        public void AddNewDataSet()
+        {
+            List<String> newLkw = AskForInput();
+
+            Lkw Lkw = new Lkw(
+                        newLkw[0],
+                        newLkw[1],
+                        newLkw[2],
+                        DateTime.Parse(newLkw[3]),
+                        Convert.ToDouble(newLkw[4]),
+                        newLkw[5],
+                        Convert.ToInt32(newLkw[6]),
+                        Convert.ToInt32(newLkw[7])
+                        );
+
+            AlleLkw.Add(Lkw);
+        }
+
+        public double Steuerschuld()
+        {
+            double Gesamtschuld = 0;
+            foreach (Lkw Wagen in AlleLkw)
+            {
+                Gesamtschuld += Wagen.Steuerschuld();
+            }
+
+            return Gesamtschuld;
+        }
+
+        public List<String> Finde(string Suchquery)
+        {
+            List<String> Wlist = new List<String>();
+            foreach (Lkw Wagen in AlleLkw)
+            {
+                if (Wagen.GetDatenString().Contains(Suchquery))
+                {
+                    Wlist.Add(Wagen.GetDatenString());
+                }
+            }
+            return Wlist;
         }
     }
 }
