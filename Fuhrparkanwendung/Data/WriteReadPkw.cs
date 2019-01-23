@@ -139,7 +139,7 @@ namespace Fuhrparkanwendung.Data
             return Gesamtschuld;
         }
 
-        public List<String>  Finde( string Suchquery)
+        public List<String> Finde( string Suchquery)
         {
             List<String> Wlist = new List<String>();
             foreach (Pkw Wagen in AllePkw)
@@ -150,6 +150,18 @@ namespace Fuhrparkanwendung.Data
                 }
             }
             return Wlist;
+        }
+
+        public void Ausbuchen(string Suchquery)
+        {
+            foreach (Pkw Wagen in AllePkw)
+            {
+                String[] Splitter = Wagen.GetDatenString().Split(',');
+                if (Splitter.Contains(Suchquery))
+                {
+                    Wagen.Stellplatz = null;
+                }
+            }
         }
     }
 }

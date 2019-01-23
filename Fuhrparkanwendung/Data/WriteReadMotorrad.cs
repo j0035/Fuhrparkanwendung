@@ -148,6 +148,17 @@ namespace Fuhrparkanwendung.Data
             return Wlist;
         }
 
-       
+        public void Ausbuchen(string Suchquery)
+        {
+            foreach (Motorrad Wagen in AlleBikes)
+            {
+                String[] Splitter = Wagen.GetDatenString().Split(',');
+                if (Splitter.Contains(Suchquery))
+                {
+                    Wagen.Stellplatz = null;
+                }
+            }
+        }
+
     }
 }

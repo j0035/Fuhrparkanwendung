@@ -147,5 +147,17 @@ namespace Fuhrparkanwendung.Data
             }
             return Wlist;
         }
+
+        public void Ausbuchen(string Suchquery)
+        {
+            foreach (Lkw Wagen in AlleLkw)
+            {
+                String[] Splitter = Wagen.GetDatenString().Split(',');
+                if (Splitter.Contains(Suchquery))
+                {
+                    Wagen.Stellplatz = null;
+                }
+            }
+        }
     }
 }
