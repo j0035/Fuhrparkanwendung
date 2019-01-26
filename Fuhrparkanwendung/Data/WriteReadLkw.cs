@@ -8,7 +8,7 @@ using Fuhrparkanwendung.Functional;
 
 namespace Fuhrparkanwendung.Data
 {
-    class WriteReadLkw
+    class WriteReadLkw : WriteRead
     {
         string filePath;
         List<Lkw> AlleLkw = new List<Lkw>();
@@ -24,26 +24,26 @@ namespace Fuhrparkanwendung.Data
             if (File.Exists(Path))
             {
                 using (StreamReader reader = new StreamReader(Path))
-            {
-                String ln;
+                {
+                    String ln;
 
                 while ((ln = reader.ReadLine()) != null)
-                {
-                    String[] ArrLkw = ln.Split(',');
-                    Lkw Lkw = new Lkw(
-                        ArrLkw[1],
-                        ArrLkw[2],
-                        ArrLkw[0],
-                        DateTime.Parse(ArrLkw[3]),
-                        Convert.ToDouble(ArrLkw[4]),
-                        ArrLkw[5],
-                        Convert.ToInt32(ArrLkw[6]),
-                        Convert.ToInt32(ArrLkw[7])
-                        );
+                    {
+                        String[] ArrLkw = ln.Split(',');
+                        Lkw Lkw = new Lkw(
+                            ArrLkw[1],
+                            ArrLkw[2],
+                            ArrLkw[0],
+                            DateTime.Parse(ArrLkw[3]),
+                            Convert.ToDouble(ArrLkw[4]),
+                            ArrLkw[5],
+                            Convert.ToInt32(ArrLkw[6]),
+                            Convert.ToInt32(ArrLkw[7])
+                            );
 
-                    AlleLkw.Add(Lkw);
+                        AlleLkw.Add(Lkw);
+                    }
                 }
-            }
             }
         }
 
@@ -51,7 +51,7 @@ namespace Fuhrparkanwendung.Data
         {
 
             using (System.IO.StreamWriter file =
-                    new System.IO.StreamWriter(Path, true))
+                    new System.IO.StreamWriter(Path, false))
             {
                 foreach (Lkw Laster in AlleLkw)
                 {
@@ -95,61 +95,30 @@ namespace Fuhrparkanwendung.Data
 
             List<String> Parameter = new List<String>();
 
-            foreach (String Frage in Fragen)
+            int count = 0;
+
+            //foreach (String Frage in Fragen)
+            for (int i = 0; i < Fragen.Length; i++)
             {
-                Console.WriteLine(Frage);
+
+                Console.WriteLine(Fragen[i]);
                 String Antwort = Console.ReadLine();
                 
-                Parameter.Add(Antwort);
-                Console.Clear();
+                if (ValidateInput(count, Antwort))
+                {
+                    Parameter.Add(Antwort);
+                    Console.Clear();
+                    count++;
+                }
+                else
+                {
+                    i--;
+                }
+                
 
             }
 
             return Parameter;
-        }
-
-        private Boolean ValidateInput(int QNumber, string input)
-        {
-            if (QNumber == 3)
-            {
-                string[]
-                if (input.Length != 10 && )
-                {
-                    Console.WriteLine("Die Eingabe entspricht nicht der Formatsvorgabe, bitte geben Sie das Datum im Format TT.MM.JJJJ ein.");
-                }
-            } 
-            return false;
-        }
-
-        private Boolean DateValidate(string input)
-        {
-            string[] Datum = input.Split('.');
-            String Fehler = "";
-            if (Convert.ToInt32(Datum[1]) < 1 || Convert.ToInt32(Datum[1]) > 12)
-            {
-                Fehler += "Der Monat muss zwischen 1 und 12 liegen!;";
-            }
-            if (Convert.ToInt32(Datum[0]) < 1 || (Convert.ToInt32(Datum[0]) > 31 && Convert.ToInt32(Datum[1]) % 2 == 1) || (Convert.ToInt32(Datum[0]) > 30 && Convert.ToInt32(Datum[1]) % 2 == 0) || (Convert.ToInt32(Datum[0]) > 29 && Convert.ToInt32(Datum[1]) == 2))
-            {
-                Fehler += "Der Tag exsistiert im " + Datum[1] + ". Monat nicht";
-            }
-            if (Datum[2].Length > 4)
-            {
-                Fehler += "Das Jahr ist zu groß;";
-            }
-            if (Convert.ToInt32(Datum[2]) < 100 && Convert.ToInt32(Datum[2]) >= 10)
-            {
-                if (Convert.ToInt32(Datum[2]) >= 10)
-                {
-                    Datum[2] = "20" + Datum[2];
-                }
-                else
-                {
-                    Datum[2] = "200" + Datum[2];
-                }
-                
-            }
-            return true;
         }
 
         public void AddNewDataSet()
@@ -168,6 +137,7 @@ namespace Fuhrparkanwendung.Data
                         );
 
             AlleLkw.Add(Lkw);
+            Save();
         }
 
         public double Steuerschuld()

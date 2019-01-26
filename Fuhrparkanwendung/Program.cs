@@ -30,6 +30,7 @@ namespace Fuhrparkanwendung
             Action truckShow = () => trucks.Show();
             Action bikeAdd = () => bikes.AddNewDataSet();
             Action bikeShow = () => bikes.Show();
+            Action addeParkhausPlatz = () => plaetze.AddNewDataSetParkhaus();
             Action find = () => Search.ShowSearchDialog();
 
             MenueItem PkwShow = new MenueItem("Alle Autos", carsShow);
@@ -38,6 +39,7 @@ namespace Fuhrparkanwendung
             MenueItem LkwShow = new MenueItem("Alle Lkw", truckShow);
             MenueItem BikeAdd = new MenueItem("Motorrad Hinzufügen", bikeAdd);
             MenueItem BikeShow = new MenueItem("Alle Bikes", bikeShow);
+            MenueItem Parkhaus = new MenueItem("Parkhaus Hinzufügen", addeParkhausPlatz);
             MenueItem SearchAction = new MenueItem("Suche", find);
 
             Action Gesamt = () => Console.WriteLine(cars.Steuerschuld() + trucks.Steuerschuld() + bikes.Steuerschuld());
@@ -56,6 +58,7 @@ namespace Fuhrparkanwendung
             Mlist.Add(BikeAdd);
             Mlist.Add(BikeShow);
             Mlist.Add(SteuerschuldGesamt);
+            Mlist.Add(Parkhaus);
             Mlist.Add(SearchAction);
 
             Menue menue = new Menue(Mlist);

@@ -9,7 +9,7 @@ using Fuhrparkanwendung.Functional;
 
 namespace Fuhrparkanwendung.Data
 {
-    class WriteReadMotorrad
+    class WriteReadMotorrad : WriteRead
     {
         string filePath;
         List<Motorrad> AlleBikes = new List<Motorrad>();
@@ -52,7 +52,7 @@ namespace Fuhrparkanwendung.Data
         {
 
             using (System.IO.StreamWriter file =
-                    new System.IO.StreamWriter(Path, true))
+                    new System.IO.StreamWriter(Path, false))
             {
                 foreach (Motorrad Bike in AlleBikes)
                 {
@@ -120,6 +120,7 @@ namespace Fuhrparkanwendung.Data
                         );
 
             AlleBikes.Add(Bike);
+            Save();
         }
 
         public double Steuerschuld()

@@ -8,7 +8,7 @@ using Fuhrparkanwendung.Functional;
 
 namespace Fuhrparkanwendung.Data
 {
-    class WriteReadPkw
+    class WriteReadPkw : WriteRead
     {
         string filePath;
         List<Pkw> AllePkw = new List<Pkw>();
@@ -163,5 +163,9 @@ namespace Fuhrparkanwendung.Data
                 }
             }
         }
+
+        //-----------------------------------------
+
+
     }
 }

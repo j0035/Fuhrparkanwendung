@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\WriteRead.cs" />
     <Compile Include="Data\WriteReadLkw.cs" />
     <Compile Include="Data\WriteReadMotorrad.cs" />
     <Compile Include="Data\WriteReadParkhausParkplatz.cs" />
