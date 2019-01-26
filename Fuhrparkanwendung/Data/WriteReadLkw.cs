@@ -86,11 +86,11 @@ namespace Fuhrparkanwendung.Data
                 "Geben Sie den Hersteller ein",
                 "Geben Sie das Modell ein",
                 "Geben Sie das Kennzeichen ein",
-                "Geben Sie das Datum der Erstzulassung ein",
-                "Geben Sie den Anschaffungspreis ein",
+                "Geben Sie das Datum der Erstzulassung ein (TT.MM.JJJJ)",
+                "Geben Sie den Anschaffungspreis ein (in Euro)",
                 "Geben Sie den Stellplatz ein (Lassen Sie dieses Feld Leer um einen leeren Platz zugewiesen zu bekommen)",
                 "Geben Sie die Anzahl der Achsen ein",
-                "Geben Sie die Zuladung ein",
+                "Geben Sie die Zuladung ein (in Tonnen)",
             };
 
             List<String> Parameter = new List<String>();
@@ -98,12 +98,58 @@ namespace Fuhrparkanwendung.Data
             foreach (String Frage in Fragen)
             {
                 Console.WriteLine(Frage);
-                Parameter.Add(Console.ReadLine());
+                String Antwort = Console.ReadLine();
+                
+                Parameter.Add(Antwort);
                 Console.Clear();
 
             }
 
             return Parameter;
+        }
+
+        private Boolean ValidateInput(int QNumber, string input)
+        {
+            if (QNumber == 3)
+            {
+                string[]
+                if (input.Length != 10 && )
+                {
+                    Console.WriteLine("Die Eingabe entspricht nicht der Formatsvorgabe, bitte geben Sie das Datum im Format TT.MM.JJJJ ein.");
+                }
+            } 
+            return false;
+        }
+
+        private Boolean DateValidate(string input)
+        {
+            string[] Datum = input.Split('.');
+            String Fehler = "";
+            if (Convert.ToInt32(Datum[1]) < 1 || Convert.ToInt32(Datum[1]) > 12)
+            {
+                Fehler += "Der Monat muss zwischen 1 und 12 liegen!;";
+            }
+            if (Convert.ToInt32(Datum[0]) < 1 || (Convert.ToInt32(Datum[0]) > 31 && Convert.ToInt32(Datum[1]) % 2 == 1) || (Convert.ToInt32(Datum[0]) > 30 && Convert.ToInt32(Datum[1]) % 2 == 0) || (Convert.ToInt32(Datum[0]) > 29 && Convert.ToInt32(Datum[1]) == 2))
+            {
+                Fehler += "Der Tag exsistiert im " + Datum[1] + ". Monat nicht";
+            }
+            if (Datum[2].Length > 4)
+            {
+                Fehler += "Das Jahr ist zu groß;";
+            }
+            if (Convert.ToInt32(Datum[2]) < 100 && Convert.ToInt32(Datum[2]) >= 10)
+            {
+                if (Convert.ToInt32(Datum[2]) >= 10)
+                {
+                    Datum[2] = "20" + Datum[2];
+                }
+                else
+                {
+                    Datum[2] = "200" + Datum[2];
+                }
+                
+            }
+            return true;
         }
 
         public void AddNewDataSet()

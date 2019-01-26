@@ -40,6 +40,11 @@ namespace Fuhrparkanwendung
             MenueItem BikeShow = new MenueItem("Alle Bikes", bikeShow);
             MenueItem SearchAction = new MenueItem("Suche", find);
 
+            Action Gesamt = () => Console.WriteLine(cars.Steuerschuld() + trucks.Steuerschuld() + bikes.Steuerschuld());
+
+            MenueItem SteuerschuldGesamt = new MenueItem("Gesamte Steuerschuld", Gesamt);
+
+
 
 
             List<MenueItem> Mlist = new List<MenueItem>();
@@ -50,6 +55,7 @@ namespace Fuhrparkanwendung
             Mlist.Add(LkwShow);
             Mlist.Add(BikeAdd);
             Mlist.Add(BikeShow);
+            Mlist.Add(SteuerschuldGesamt);
             Mlist.Add(SearchAction);
 
             Menue menue = new Menue(Mlist);
