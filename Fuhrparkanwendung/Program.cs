@@ -14,6 +14,9 @@ namespace Fuhrparkanwendung
     {
         static void Main(string[] args)
         {
+            Console.WindowWidth = 120;
+            Console.WindowHeight = 50;
+
             string path = @"C:\Users\Public\FuhrparkanwendungFia72";
             if (!Directory.Exists(path))
             {
@@ -46,19 +49,36 @@ namespace Fuhrparkanwendung
 
             MenueItem SteuerschuldGesamt = new MenueItem("Gesamte Steuerschuld", Gesamt);
 
-            List<MenueItem> Mlist = new List<MenueItem>();
+            List<MenueItem> ListShow = new List<MenueItem>();
+            List<MenueItem> ListAdd = new List<MenueItem>();
+            List<MenueItem> MainList = new List<MenueItem>();
 
-            Mlist.Add(PkwAdd);
-            Mlist.Add(PkwShow);
-            Mlist.Add(LkwAdd);
-            Mlist.Add(LkwShow);
-            Mlist.Add(BikeAdd);
-            Mlist.Add(BikeShow);
-            Mlist.Add(SteuerschuldGesamt);
-            Mlist.Add(Parkhaus);
-            Mlist.Add(SearchAction);
 
-            Menue menue = new Menue(Mlist);
+            ListAdd.Add(PkwAdd);
+            ListAdd.Add(LkwAdd);
+            ListAdd.Add(BikeAdd);
+            ListShow.Add(PkwShow);
+            ListShow.Add(LkwShow);
+            ListShow.Add(BikeShow);
+
+            Menue menueAdd = new Menue(ListAdd);
+            Menue menueShow = new Menue(ListShow);
+
+            Action MenueAdd = () => menueAdd.runMenue();
+            MenueItem UnterMenueAdd = new MenueItem("Fahrzeug Hinzufügen", MenueAdd);
+            Action MenueShow = () => menueShow.runMenue();
+            MenueItem UnterMenueShow = new MenueItem("Alle Fahrzeuge Anzeigen", MenueShow);
+
+
+            MainList.Add(UnterMenueShow);
+            MainList.Add(UnterMenueAdd);
+            MainList.Add(SteuerschuldGesamt);
+            MainList.Add(Parkhaus);
+            MainList.Add(SearchAction);
+
+
+
+            Menue menue = new Menue(MainList);
 
 
             menue.runMenue();

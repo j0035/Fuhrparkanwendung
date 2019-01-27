@@ -60,10 +60,12 @@ namespace Fuhrparkanwendung
 
         private void WriteMenueText()
         {
+            ShowInfoOnBottom();
             for (int i = 0; i < MenueItems.Count; i++)
             {
                 WriteSingleMenueItems(i);
             }
+
 
             //foreach (MenueItem Item in MenueItems)
             //{
@@ -123,10 +125,33 @@ namespace Fuhrparkanwendung
             return firstItem > secondItem;
         }
 
-        public Boolean test()
+        public void ShowInfoOnBottom() // diese funktionen sind kackendreist kopiert
         {
-            Console.WriteLine("Hallo Welt");
-            return true;
+            string symbol = "Um dieses Menü zu verlassen drücken Sie E";
+            int x = 0;
+            int y = 49;
+            ConsoleColor color = ConsoleColor.White;
+
+            // Remember current state
+            int memX = Console.CursorLeft;
+            int memY = Console.CursorTop;
+            ConsoleColor memColor = Console.ForegroundColor;
+
+            ShowText(symbol, x, y, color);
+
+            // Restore remembered state
+            Console.CursorLeft = memX;
+            Console.CursorTop = memY;
+            Console.ForegroundColor = memColor;
+        }
+
+        private static void ShowText(string text, int x, int y, ConsoleColor color) // diese funktionen sind kackendreist kopiert
+        {
+            // Show symbol regarding its paramters
+            Console.CursorLeft = x;
+            Console.CursorTop = y;
+            Console.ForegroundColor = color;
+            Console.WriteLine(text);
         }
     }
 }
