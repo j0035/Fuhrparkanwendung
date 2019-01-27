@@ -77,7 +77,6 @@ namespace Fuhrparkanwendung.Data
             {
                 Console.WriteLine(Bike.GetDatenString());
             }
-            Console.ReadKey();
         }
 
         private List<String> AskForInput()
@@ -88,21 +87,15 @@ namespace Fuhrparkanwendung.Data
                 "Geben Sie das Kennzeichen ein",
                 "Geben Sie das Datum der Erstzulassung ein",
                 "Geben Sie den Anschaffungspreis ein",
-                "Geben Sie den Stellplatz ein (Lassen Sie dieses Feld Leer um einen leeren Platz zugewiesen zu bekommen)",
+                "Geben Sie den Stellplatz ein (Format: 'Parkhaus/Parkpaltz' oder für eine Zufällig Parkplatz vergabe nur das Parkhaus angeben)",
                 "Geben Sie den Hubraum ein"
             };
 
-            List<String> Parameter = new List<String>();
+            
+            int FahrzeugTyp = 2;
 
-            foreach (String Frage in Fragen)
-            {
-                Console.WriteLine(Frage);
-                Parameter.Add(Console.ReadLine());
-                Console.Clear();
-
-            }
-
-            return Parameter;
+            return Antworten(Fragen, FahrzeugTyp);
+ 
         }
 
         public void AddNewDataSet()

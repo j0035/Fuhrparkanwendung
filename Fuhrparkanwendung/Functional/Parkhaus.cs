@@ -8,11 +8,11 @@ namespace Fuhrparkanwendung.Functional
 {
     class Parkhaus
     {
-        string Parkhausname { get; set; }
+        public string Parkhausname { get; set; }
         int AnzahlParkplaetze { get; set; }
-        string Ort { get; set; } 
-        string Adresse { get; set; }
-        string Plz { get; set; }
+        public string Ort { get; set; } 
+        public string Adresse { get; set; }
+        public string Plz { get; set; }
 
         public Parkhaus(string Parkhausname, string Ort, string Adresse, string Plz)
         {

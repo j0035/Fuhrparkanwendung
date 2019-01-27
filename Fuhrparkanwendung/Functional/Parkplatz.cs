@@ -12,6 +12,7 @@ namespace Fuhrparkanwendung.Functional
         public bool Besetzt { get; set; }
         public int Typ { get; set; }
         public string _Kennzeichen { get; set; }
+        private string ParkhausHier, PlatzHier;
         
         
         public Parkplatz(string Id, int Typ, bool Besetzt = false, string Kennzeichen = null)
@@ -20,6 +21,9 @@ namespace Fuhrparkanwendung.Functional
             this.Typ = Typ;
             this.Besetzt = Besetzt;
             this.Kennzeichen = Kennzeichen;
+            String[] IdSplit = Id.Split('/');
+            this.ParkhausHier = IdSplit[0];
+            this.PlatzHier = IdSplit[1];
         }
 
         public string Kennzeichen
@@ -59,9 +63,13 @@ namespace Fuhrparkanwendung.Functional
 
         public string Parkhaus()
         {
-            String[] Parkhaus = Id.Split('/');
-            return Parkhaus[0];
+            return ParkhausHier;
         }
-           
+
+        public string Platz()
+        {
+            return PlatzHier;
+        }
+
     }
 }

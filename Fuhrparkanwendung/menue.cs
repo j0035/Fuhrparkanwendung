@@ -38,6 +38,7 @@ namespace Fuhrparkanwendung
                         Console.Clear();
                         MenueItems[currentItem].execute();
                         currentItem = 0;
+                        Console.ReadKey();
                         Console.Clear();
                         enter = false;
                         WriteMenueText();

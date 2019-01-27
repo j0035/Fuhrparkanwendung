@@ -60,7 +60,6 @@ namespace Fuhrparkanwendung.Data
             }
         }
 
-
         public void Load()
         {
             LoadLkwArray(filePath);
@@ -77,7 +76,6 @@ namespace Fuhrparkanwendung.Data
             {
                 Console.WriteLine(Laster.GetDatenString());
             }
-            Console.ReadKey();
         }
 
         private List<String> AskForInput()
@@ -88,37 +86,14 @@ namespace Fuhrparkanwendung.Data
                 "Geben Sie das Kennzeichen ein",
                 "Geben Sie das Datum der Erstzulassung ein (TT.MM.JJJJ)",
                 "Geben Sie den Anschaffungspreis ein (in Euro)",
-                "Geben Sie den Stellplatz ein (Lassen Sie dieses Feld Leer um einen leeren Platz zugewiesen zu bekommen)",
+                "Geben Sie den Stellplatz ein (Format: 'Parkhaus/Parkpaltz' oder für eine Zufällig Parkplatz vergabe nur das Parkhaus angeben)",
                 "Geben Sie die Anzahl der Achsen ein",
                 "Geben Sie die Zuladung ein (in Tonnen)",
             };
 
-            List<String> Parameter = new List<String>();
+            int FahrzeugTyp = 1;
 
-            int count = 0;
-
-            //foreach (String Frage in Fragen)
-            for (int i = 0; i < Fragen.Length; i++)
-            {
-
-                Console.WriteLine(Fragen[i]);
-                String Antwort = Console.ReadLine();
-                
-                if (ValidateInput(count, Antwort))
-                {
-                    Parameter.Add(Antwort);
-                    Console.Clear();
-                    count++;
-                }
-                else
-                {
-                    i--;
-                }
-                
-
-            }
-
-            return Parameter;
+            return Antworten(Fragen, FahrzeugTyp);
         }
 
         public void AddNewDataSet()

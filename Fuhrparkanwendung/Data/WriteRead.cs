@@ -8,8 +8,10 @@ namespace Fuhrparkanwendung.Data
 {
     class WriteRead
     {
-        public Boolean ValidateInput(int QNumber, string input)
+        public string ValidateInput(int QNumber, string input, string kennzeichen, int typ)
         {
+            string path = @"C:\Users\Public\FuhrparkanwendungFia72";
+            String id = "";
             if (QNumber == 3)
             {
                 List<String> Fehler = DateValidate(input);
@@ -19,13 +21,38 @@ namespace Fuhrparkanwendung.Data
                     {
                         Console.WriteLine(Falsch);
                     }
-                    return false;
+                    return null;
                 }
-
                 Console.WriteLine("Fehler Count = " + Convert.ToString(Fehler.Count));
             }
 
-            return true;
+            if (QNumber == 5)
+            {
+                
+                String[] inputArr = input.Split('/');
+                WriteReadParkhausParkplatz Parkplatz = new WriteReadParkhausParkplatz(path + "\\" + "parkhaus.csv", path + "\\" + "parkplatz.csv");
+                if (inputArr.Length == 1)
+                {
+                    id = Parkplatz.BucheParkplatz(kennzeichen, typ, inputArr[0]);
+                    if(id == null)
+                    {
+                        Console.WriteLine("Ihr Parkhaus ist voll!!!");
+                        return null;
+                        
+                    }
+                }
+                else
+                {
+                    id = Parkplatz.BucheParkplatz(kennzeichen, typ, inputArr[0], inputArr[1]);
+                    if (id == null)
+                    {
+                        Console.WriteLine("Parkplatz ist besetzt oder das Fahrzeug entspricht nicht dem Parkpaltztyp, bitte einen Anderen Platz auswählen");
+                        return null;
+                    }
+                }
+            }
+
+            return id;
         }
 
         public List<String> DateValidate(string input)
@@ -46,5 +73,47 @@ namespace Fuhrparkanwendung.Data
             }
             return Fehler;
         }
+
+        public List<String> Antworten ( String[] Fragen, int FahrzeugTyp )
+        {
+            List<String> Parameter = new List<String>();
+
+            int count = 0;
+            string Kennzeichen = null;
+
+            for (int i = 0; i < Fragen.Length; i++)
+            {
+
+                Console.WriteLine(Fragen[i]);
+                String Antwort = Console.ReadLine();
+
+                if (count > 2)
+                {
+                    Kennzeichen = Parameter[2];
+                }
+
+                if (count == 5)
+                {
+                    string id = ValidateInput(count, Antwort, Kennzeichen, FahrzeugTyp);
+                    Parameter.Add(id);
+                    Console.Clear();
+                    count++;
+                }
+                else if (ValidateInput(count, Antwort, Kennzeichen, FahrzeugTyp) == "")
+                {
+                    Parameter.Add(Antwort);
+                    Console.Clear();
+                    count++;
+                }
+                else
+                {
+                    i--;
+                }
+            }
+
+            return Parameter;
+        }
+
+
     }
 }

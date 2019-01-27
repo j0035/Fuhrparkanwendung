@@ -101,6 +101,7 @@ namespace Fuhrparkanwendung.Data
             PersistParkhausAdresse(filePathParkhaus);
         }
 
+
         //--------------------------------------------------------------------
 
         private void PersistPkwArray(string Path)
@@ -127,8 +128,8 @@ namespace Fuhrparkanwendung.Data
                     while ((ln = reader.ReadLine()) != null)
                     {
                         string[] ParkPlatz = ln.Split(',');
-                        Boolean Besetzt = ParkPlatz[2] == "" ? false : true;
-                        string Kennzeichen = Besetzt == false ? ParkPlatz[2] : null;
+                        Boolean Besetzt = (ParkPlatz[2] == "" ? false : true);
+                        string Kennzeichen = Besetzt == false ? null : ParkPlatz[2];
                         Parkplatz Platz = new Parkplatz(ParkPlatz[0], Convert.ToInt16(ParkPlatz[1]), Besetzt, Kennzeichen);
                         this.ParkPlatzList.Add(Platz);
 
@@ -222,22 +223,50 @@ namespace Fuhrparkanwendung.Data
             SaveParkplatz();
         }
 
-        public string BucheParkplatz(string Kennzeichen, int typ, string Parkhaus, string OnePlatz = "")
+        public string BucheParkplatz(string Kennzeichen, int typ, string Parkhaus, string OnePlatz = null)
         {
-            foreach (Parkplatz Platz in ParkPlatzList)
+            if (OnePlatz == null)
             {
-
-                if (!Platz.Besetzt && Platz.Parkhaus() == Parkhaus && Platz.Typ == typ)
+                foreach (Parkplatz Platz in ParkPlatzList)
                 {
-                    Platz.Kennzeichen = Kennzeichen;
-                    return Platz.Id;
-                }
-                else
-                {
-                    continue;
+                    string PlatzHier = Platz.Parkhaus();
+                    if (Platz.Besetzt == false && PlatzHier == Parkhaus && Platz.Typ == typ)
+                    {
+                        Platz.Kennzeichen = Kennzeichen;
+                        SaveParkplatz();
+                        return Platz.Id;
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
-            return "Achtung Parkplatz ist belegt";
+            else
+            {
+                foreach (Parkplatz Platz in ParkPlatzList)
+                {
+                    if (Platz.Parkhaus() == Parkhaus && Platz.Typ == typ && Platz.Platz() == OnePlatz)
+                    {
+                        if (!Platz.Besetzt)
+                        {
+                            return null;
+                        }
+                        else
+                        {
+                            Platz.Kennzeichen = Kennzeichen;
+                            SaveParkplatz();
+                            return Platz.Id;
+                        }
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+            }
+
+            return null;
         }
 
     }

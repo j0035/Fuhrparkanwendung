@@ -46,9 +46,6 @@ namespace Fuhrparkanwendung
 
             MenueItem SteuerschuldGesamt = new MenueItem("Gesamte Steuerschuld", Gesamt);
 
-
-
-
             List<MenueItem> Mlist = new List<MenueItem>();
 
             Mlist.Add(PkwAdd);
@@ -62,6 +59,8 @@ namespace Fuhrparkanwendung
             Mlist.Add(SearchAction);
 
             Menue menue = new Menue(Mlist);
+
+
             menue.runMenue();
 
         }
