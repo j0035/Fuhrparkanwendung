@@ -26,6 +26,7 @@ namespace Fuhrparkanwendung
             WriteReadLkw trucks = new WriteReadLkw(path + "\\" + "trucks.csv");
             WriteReadMotorrad bikes = new WriteReadMotorrad(path + "\\" + "bikes.csv");
             WriteReadParkhausParkplatz plaetze = new WriteReadParkhausParkplatz(path + "\\" + "parkhaus.csv", path + "\\" + "parkplatz.csv");
+
             Suche Search = new Suche(path);
             Action carsShow = () => cars.Show();
             Action carAdd = () => cars.AddNewDataSet();
@@ -45,7 +46,7 @@ namespace Fuhrparkanwendung
             MenueItem Parkhaus = new MenueItem("Parkhaus Hinzufügen", addeParkhausPlatz);
             MenueItem SearchAction = new MenueItem("Suche", find);
 
-            Action Gesamt = () => Console.WriteLine(cars.Steuerschuld() + trucks.Steuerschuld() + bikes.Steuerschuld());
+            Action Gesamt = () => Console.WriteLine(cars.Steuerschuld() + trucks.Steuerschuld() + bikes.Steuerschuld() + " Euro");
 
             MenueItem SteuerschuldGesamt = new MenueItem("Gesamte Steuerschuld", Gesamt);
 
@@ -76,11 +77,7 @@ namespace Fuhrparkanwendung
             MainList.Add(Parkhaus);
             MainList.Add(SearchAction);
 
-
-
             Menue menue = new Menue(MainList);
-
-
             menue.runMenue();
 
         }
